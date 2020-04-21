@@ -29,9 +29,17 @@ class Solution:
             return left
         if A[right] > A[right + 1] and A[right] > A[right - 1]:
             return right
-            
-
-
+  
+# solution  
+class Solution:
+    def peakIndexInMountainArray(self, A: List[int]) -> int:
+        left, right = 0, len(A) - 1
+        while left + 1 < right:
+            mid = (left + right) // 2
+            if A[mid - 1] < A[mid] > A[mid + 1]: return mid
+            elif A[mid] < A[mid + 1]: left = mid
+            else: right = mid
+        return left if A[left] > A[right] else right
 
 
 # template 2
@@ -48,7 +56,21 @@ class Solution:
                 right = mid
         return left
         
-        
+
+# solution
+class Solution:
+    def peakIndexInMountainArray(self, A: List[int]) -> int:
+        left, right = 0, len(A) - 1
+        while left < right:
+            mid = left  + (right - left) // 2
+            if A[mid - 1] < A[mid] > A[mid + 1]: return mid
+            elif A[mid] < A[mid + 1]: left = mid + 1
+            else: right = mid
+        return left
+
+
+
+
 # template 3
 class Solution:
     def peakIndexInMountainArray(self, A: List[int]) -> int:
@@ -64,7 +86,15 @@ class Solution:
                 
         
 
-
+# solution
+class Solution:
+    def peakIndexInMountainArray(self, A: List[int]) -> int:
+        left, right = 0, len(A) - 1
+        while left <= right:
+            mid = left  + (right - left) // 2
+            if A[mid - 1] < A[mid] > A[mid + 1]: return mid
+            elif A[mid] < A[mid + 1]: left = mid + 1
+            else: right = mid - 1
 
 
 
