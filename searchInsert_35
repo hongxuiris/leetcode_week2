@@ -1,0 +1,71 @@
+
+# 35. Search Insert Position
+# Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would 
+# be if it were inserted in order.
+
+# You may assume no duplicates in the array.
+
+
+
+# template 1
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        if not nums: return 0
+        left, right = 0, len(nums) - 1
+        while left + 1 < right:
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] < target:
+                left = mid
+            else:
+                right = mid
+        if target <= nums[left]: return left
+        if target <= nums[right]: return right
+        return right + 1
+
+
+
+
+
+
+# template 2
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        if not nums: return 0
+        left, right = 0, len(nums) - 1
+        while left < right:
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] < target:
+                left = mid + 1
+            else: 
+                right = mid
+        if target <= nums[left]: return left
+        return left + 1
+
+
+
+
+# template 3
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        if not nums: return 0
+        left, right = 0, len(nums) - 1
+
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return left
+
+
+# use bisect function
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        return bisect.bisect_left(nums, target)
