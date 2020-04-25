@@ -1,0 +1,89 @@
+
+# 69. Sqrt(x)
+
+# mplement int sqrt(int x).
+
+# Compute and return the square root of x, where x is guaranteed to be a non-negative integer.
+# Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.
+
+# Example 1:
+# Input: 4
+# Output: 2
+
+# Example 2:
+# Input: 8
+# Output: 2
+# Explanation: The square root of 8 is 2.82842..., and since 
+#             the decimal part is truncated, 2 is returned.
+             
+             
+             
+# binary search
+# time complexity: O(longn)
+# space complexity: O(1)
+
+# template 1
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        left, right = 0, x
+        while left + 1 < right:
+            mid = (left + right) // 2
+            if mid ** 2 == x : return mid
+            elif mid **2 < x: left = mid
+            else: right = mid
+                
+        if right ** 2 == x: return right
+        else: return left
+        
+        
+
+# template 2
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        left, right = 0, x
+        while left < right:
+            mid = (left + right) // 2
+            if mid ** 2 == x: return mid
+            elif mid ** 2 < x: left = mid + 1
+            else: right = mid
+        if left ** 2 == x: return left
+        else: return left - 1
+        
+
+
+
+
+# template 3
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        left, right = 0, x
+        while left <= right:
+            mid = (left + right) // 2
+            if mid **2 == x: return mid
+            elif mid **2 < x: left = mid + 1
+            else: right = mid - 1
+        return right
+ 
+ 
+# newton's method
+# time complexity: O(1)
+# space complexity: O(1)
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        res = x
+        while res ** 2 > x:
+            res = (res + x // res) // 2
+        return res
+        
+
+
+
+
+
+
+
+
+
+
+
+
