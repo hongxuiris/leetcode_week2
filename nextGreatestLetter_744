@@ -1,0 +1,92 @@
+# 744. Find Smallest Letter Greater Than Target
+
+    
+# Given a list of sorted characters letters containing only lowercase letters, and given a target letter target, 
+# find the smallest element in the list that is larger than the given target.
+# Letters also wrap around. For example, if the target is target = 'z' and letters = ['a', 'b'], the answer is 'a'.
+
+# Examples:
+
+# Input:
+# letters = ["c", "f", "j"]
+# target = "a"
+# Output: "c"
+
+# Input:
+# letters = ["c", "f", "j"]
+# target = "c"
+# Output: "f"
+
+# Input:
+# letters = ["c", "f", "j"]
+# target = "d"
+# Output: "f"
+
+# Input:
+# letters = ["c", "f", "j"]
+# target = "g"
+# Output: "j"
+
+# Input:
+# letters = ["c", "f", "j"]
+# target = "j"
+# Output: "c"
+
+# Input:
+# letters = ["c", "f", "j"]
+# target = "k"
+# Output: "c"
+# Note:
+
+# letters has a length in range [2, 10000].
+# letters consists of lowercase letters, and contains at least 2 unique letters.
+# target is a lowercase letter.
+
+
+# template 1
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        left, right = 0, len(letters) - 1
+        while left + 1 < right:
+            mid = (left + right) // 2
+            if letters[mid] <= target: left = mid
+            else: right = mid
+        if letters[left] > target: return letters[left]
+        if letters[right] > target: return letters[right]
+        return letters[0]
+
+
+# template 2
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        left, right = 0, len(letters) - 1
+        while left < right:
+            mid = (left + right) // 2
+            if letters[mid] <= target: left = mid + 1
+            else: right = mid
+            
+        if letters[left] > target: return letters[left]
+        return letters[0]
+ 
+        
+# template 3
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        left, right = 0, len(letters) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if letters[mid] <= target: left = mid + 1
+            else: right = mid - 1
+        if left > len(letters) - 1: return letters[0]
+        return letters[left]
+    
+    
+    
+#bisect.bisect(), bisect.bisect(right)
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        pos = bisect.bisect(letters, target)
+        return letters[pos] if pos < len(letters) else letters[0]
+
+
+
